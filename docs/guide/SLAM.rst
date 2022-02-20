@@ -26,9 +26,9 @@ In addition to the tools included in the kit, the following items are required f
 Step 2.1 Download the image  イメージのダウンロード
 ^^^^^^^^^^^^^^^^^^^^^
 
-* "MiniPupper2004.zip" is zip file of the image for the Ubuntu + ROS version for SLAM & Navigation. Download and unzip the zip file.「MiniPupper2004.zip」はSLAM＆NavigationのUbuntu + ROSバージョンのイメージのzipファイルです。ファイルをダウンロードして、解凍します。
+* "(64bit)v1.0.0.20220219.MiniPupper_V2_ROS&OpenCV_Ubuntu20.04.03.img.zip" is zip file of the image for the Ubuntu + ROS version for SLAM & Navigation. This image has already installed ROS Noetic. Download and unzip the zip file.「(64bit)v1.0.0.20220219.MiniPupper_V2_ROS&OpenCV_Ubuntu20.04.03.img.zip」はSLAM＆NavigationのUbuntu + ROSバージョンのイメージのzipファイルです。ファイルをダウンロードして、解凍します。
 
-  `MiniPupper2004.zip <https://drive.google.com/file/d/11zeivhN-fyTMdf6iuhcVD-Ib6aKj7s_5/view?usp=sharing>`_ 
+  `(64bit)v1.0.0.20220219.MiniPupper_V2_ROS&OpenCV_Ubuntu20.04.03.img.zip <https://drive.google.com/file/d/1gxisQQCIXHLqBpFs_-yun-ajLsee6gy8/view?usp=sharing>`_ 
   
 Step 2.2 Write the image into microSD microSDにイメージを書く
 ^^^^^^^^^^^^^^^^^^^^^
@@ -45,10 +45,10 @@ Here we introduce the method of writing the image into microSD through Raspberry
 .. image:: ../_static/148.gif
     :align: center
 
-Step 2.3 Install ROS noetic ROS noeticをインストールする
+Step 2.3 Install ROS Noetic ROS Noeticをインストールする
 ^^^^^^^^^^^^^^^^^^^^^
 
-* You can skip this step if you have already installed ROS noetic. Basically you can follow the instructions on http://wiki.ros.org/noetic/Installation/Ubuntu. ROS noeticをすでにインストールしている場合は、この手順をスキップできます。基本的に、http://wiki.ros.org/noetic/Installation/Ubuntu の指示に従うことができます。
+* You can skip this step if you have used the pre-installed image or if you have already installed ROS Noetic on your own. Basically you can follow the instructions on http://wiki.ros.org/noetic/Installation/Ubuntu if you want to install manually. ROS Noeticをインストール済みのイメージを使用している場合、あるいはすでにインストールしている場合は、この手順をスキップできます。基本的に、http://wiki.ros.org/noetic/Installation/Ubuntu に沿ってインストールを進めることができます。
 
 Step 2.4 Cartographer_ros environment setup Cartographer_rosの環境セットアップ
 ^^^^^^^^^^^^^^^^^^^^^
@@ -74,20 +74,27 @@ Step 2.4 Cartographer_ros environment setup Cartographer_rosの環境セット�
 Step 2.5 Compile the package for Mini Pupper ROS Mini Pupper ROS用のパッケージをコンパイル
 ^^^^^^^^^^^^^^^^^^^^
 
-* Download the required package `mnpp_ws.zip <https://drive.google.com/file/d/1gbuvy29hNnS3Ep2o_uR8qAYnFKkr7Dj4/view?usp=sharing>`_  and unzip it to home. 必要なパッケージ `mnpp_ws.zip <https://drive.google.com/file/d/1gbuvy29hNnS3Ep2o_uR8qAYnFKkr7Dj4/view?usp=sharing>`_ をダウンロードして、homeに解凍します。
+* You can skip this step if you have used the pre-installed image. ROS Noeticをインストール済みのイメージを使用している場合は、この手順をスキップできます。
 
-.. image:: ../_static/149.gif
-    :align: center
+* Download the required package to the workspace. 必要なパッケージをワークスペースにダウンロードします。
+
+::
+
+	mkdir -p ~/catkin_ws/src
+	cd ~/catkin_ws/src
+	catkin_init_workspace .
+	git clone --recursive https://github.com/mangdangroboticsclub/minipupper_ros.git
+
     
 * Compile the package. パッケージをコンパイルします。
 
 ::
 
-	cd ~/mnpp_ws/
+	cd ~/catkin_ws/
 	sudo apt-get install libudev-dev
 	rosdep install --from-paths src --ignore-src -r -y
 	catkin_make
-	source ~/mnpp_ws /devel/setup.bash
+	source ~/catkin_ws/devel/setup.bash
 
 
 .. image:: ../_static/150.gif
